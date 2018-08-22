@@ -17,11 +17,11 @@ namespace api_relatorio_transacoes.Controllers
             return new string[] { "value1", "value2" };
         }
 
-        // GET api/values/5
+        // GET api/value/5
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public ActionResult<string> Get(int id=3)
         {
-            return "value";
+            return "value: "+id;
         }
 
         
