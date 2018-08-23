@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-
+using api_relatorio_transacoes.Models;
+using MongoDB.Bson;
 
 namespace api_relatorio_transacoes.Controllers
 {
@@ -11,12 +12,14 @@ namespace api_relatorio_transacoes.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        private dbContext _contexto;
+        private DBContext _contexto;
 
-        public ValuesController(dbContext context)
+        public ValuesController(DBContext context)
         {
             _contexto = context;
         }
+
+       
         // GET api/data/5
         [HttpGet("{a}")]
         public ActionResult<string> Get(int a)
@@ -28,23 +31,38 @@ namespace api_relatorio_transacoes.Controllers
         [HttpGet]
         public ActionResult<string> GetTransacao(int id=3)
         {
-            // Transacao
-            return "value: "+id;
+            Transacao trans = null;
+            trans = _contexto.ObterItem<Transacao>(id);
+            // return "value: "+id;
+            if (trans != null)
+                return new ObjectResult(trans);
+            else
+                return NotFound();
         }
 
         
     }
 
+
+
     [Route("api/otro")]
     
     public class MioController : ControllerBase
     {
+         private DBContext _contexto;
+
+        public MioController(DBContext context)
+        {
+            _contexto = context;
+        }
+
         // GET api/otro
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public ActionResult<string> GetAll()
         {
-            return new string[] { "value1", "value2" };
+            return new ObjectResult(_contexto.ObterItems<Transacao>());
         }
+
 
         // Get api/otro/3
         [HttpGet("{id}")]
