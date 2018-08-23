@@ -12580,7 +12580,8 @@
     ".NETCoreApp,Version=v2.1": [
       "Microsoft.AspNetCore.App >= 2.1.1",
       "Microsoft.NETCore.App >= 2.1.0",
-      "MongoDB.Driver >= 2.7.0"
+      "MongoDB.Driver >= 2.7.0",
+      "MongoDB.Driver.Core >= 2.7.0"
     ]
   },
   "packageFolders": {
@@ -12634,6 +12635,10 @@
             "autoReferenced": true
           },
           "MongoDB.Driver": {
+            "target": "Package",
+            "version": "[2.7.0, )"
+          },
+          "MongoDB.Driver.Core": {
             "target": "Package",
             "version": "[2.7.0, )"
           }
