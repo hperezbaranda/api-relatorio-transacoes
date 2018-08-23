@@ -10,6 +10,12 @@ namespace api_relatorio_transacoes.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        private dbContext _contexto;
+
+        public ValuesController(dbContext context)
+        {
+            _contexto = context;
+        }
         // GET api/data/5
         [HttpGet("{a}")]
         public ActionResult<string> Get(string a)
