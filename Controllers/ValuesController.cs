@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace api_relatorio_transacoes.Controllers
 {
     [Route("api/data")]
@@ -18,15 +19,16 @@ namespace api_relatorio_transacoes.Controllers
         }
         // GET api/data/5
         [HttpGet("{a}")]
-        public ActionResult<string> Get(string a)
+        public ActionResult<string> Get(int a)
         {
             return "value > "+a;
         }
 
         // GET api/data/?id=5
         [HttpGet]
-        public ActionResult<string> Get(int id=3)
+        public ActionResult<string> GetTransacao(int id=3)
         {
+            // Transacao
             return "value: "+id;
         }
 
