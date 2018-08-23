@@ -30,23 +30,23 @@ namespace api_relatorio_transacoes.Models
             
             var coll = db.GetCollection<Transacao>("transacoes");
            
-            var cursor = coll.Find(filter).ToList();
-            // return coll.Find(filter).ToList();
-            List<Transacao> t = new List<Transacao>();
-            foreach (var document in cursor)
-            {
-                // System.Console.Write(document.ToJson());
-                t.Add(document);   
-            }
+            // var cursor = coll.Find(filter).ToList();
+            return coll.Find(filter).ToList();
+            // List<Transacao> t = new List<Transacao>();
+            // foreach (var document in cursor)
+            // {
+            //     // System.Console.Write(document.ToJson());
+            //     t.Add(document);   
+            // }
             
-            foreach (var item in t)
-            {
-                System.Console.Write(item);
-            }
+            // foreach (var item in t)
+            // {
+            //     System.Console.Write(item);
+            // }
 
 
-            // //System.Console.Write(t);
-            return t;
+            // // //System.Console.Write(t);
+            // return t;
 
             // return db.GetCollection<Transacao>("transacoes")
             //     .Find(filter).ToList();
