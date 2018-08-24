@@ -27,15 +27,20 @@ namespace api_relatorio_transacoes.Controllers
             return "value > "+a;
         }
 
-        // GET api/data/?id=5
+        // GET api/data/?id=5,time=6
         [HttpGet]
-        public ActionResult<string> GetTransacao(int id=3)
+        public ActionResult<Transacao> GetTransacao(int id=-1,long cnpj=-1,int checkout=-1
+                , string cardnum="" ,int amount=-1, int inst=-1, string acqname="",
+                string paymethod="", string brandname="", string status="", string statusinf ="",
+                 DateTime crated=new DateTime(),DateTime adquire = new DateTime() )
         {
-            Transacao trans = null;
-            trans = _contexto.ObterItem<Transacao>(id);
+            // System.Console.WriteLine(test.Split(",")[0]);
+            List<Transacao> trans = null;
+            trans = _contexto.ObterItem<Transacao>(brandname);
             // return "value: "+id;
+        
             if (trans != null)
-                return new ObjectResult(trans);
+                return new JsonResult(trans);
             else
                 return NotFound();
         }
@@ -58,9 +63,15 @@ namespace api_relatorio_transacoes.Controllers
 
         // GET api/otro
         [HttpGet]
-        public ActionResult<string> GetAll()
+        public ActionResult<Transacao> GetAll()
         {
-            return new ObjectResult(_contexto.ObterItems<Transacao>());
+            List<Transacao> trans = null;
+            trans = _contexto.ObterItems<Transacao>();
+            if (trans != null)
+                return new JsonResult(trans);
+            else
+                return NotFound();
+            // return new  JsonResult(_contexto.ObterItems<Transacao>());
         }
 
 

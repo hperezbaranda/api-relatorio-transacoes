@@ -29,9 +29,10 @@ namespace api_relatorio_transacoes.Models
             var filter = builder.Eq("CardBrandName", "Maestro") & builder.Eq("AmountInCent",3000);
             
             var coll = db.GetCollection<Transacao>("transacoes");
-           
+            
             // var cursor = coll.Find(filter).ToList();
             return coll.Find(filter).ToList();
+            // return trans.Where(t=>t.TransactionId == id).Select(t=>t).FirstOrDefault();
             // List<Transacao> t = new List<Transacao>();
             // foreach (var document in cursor)
             // {
@@ -52,16 +53,31 @@ namespace api_relatorio_transacoes.Models
             //     .Find(filter).ToList();
             
         }
-        public Transacao ObterItem<Transacao>(int codigo)
+        public List<Transacao> ObterItem<Transacao>(string brand)
         {   
-            var builder = Builders<Transacao>.Filter;
-            // var filter = builder.Eq("CardBrandName", "Maestro") & builder.Eq("AmountInCent",3000);
-            var filter = builder.Eq("TransactionId",codigo);
-            // var filter = "{'CardBrandName:Maestro','AmountInCent:3000'}";
+            // System.Console.WriteLine(brand);
+            // var filter1 ="";
+            var lstbrand = brand.Split(",");
+            var brands= "";
+            
+            foreach (var ibrand in lstbrand)
+            {
+                brands+="'"+ibrand+"',";
+            }
+            var filter1 = "{CardBrandName:{$in:["+brands+"]}}";
+            
+            // var builder = Builders<Transacao>.Filter;
+            // var filter = builder.Eq("CardBrandName", "Maestro") & builder.Eq("CardBrandName", "Visa");
+            // var filter = builder.In("CardBrandName", "Visa");
+            // var filter = "{CardBrandName:'Maestro',AmountInCent:3000}";
+            // var filter = "{CardBrandName:{$in:['Maestro','Visa']}}";
+            // var filter = "{CardBrandName:{$in:['Maestro','Visa',]}}";
 
+            var coll = db.GetCollection<Transacao>("transacoes");
 
-            return db.GetCollection<Transacao>("transacoes")
-                .Find(filter).FirstOrDefault();
+            // System.Console.WriteLine(filter1);
+
+            return coll.Find(filter1).ToList();
         }
     }
 }
