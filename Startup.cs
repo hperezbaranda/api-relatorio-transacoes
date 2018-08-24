@@ -11,7 +11,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using api_relatorio_transacoes.Models;
-// using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.ResponseCompression;
+using System.IO.Compression;
+
 
 namespace api_relatorio_transacoes
 {
@@ -29,6 +31,12 @@ namespace api_relatorio_transacoes
         {
             services.AddTransient<DBContext>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.Configure<GzipCompressionProviderOptions>(
+                options => options.Level = CompressionLevel.Optimal);
+            services.AddResponseCompression(options =>
+            {
+                options.Providers.Add<GzipCompressionProvider>();
+            } );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,7 +52,9 @@ namespace api_relatorio_transacoes
             }
 
             app.UseHttpsRedirection();
+            app.UseResponseCompression();
             app.UseMvc();
+           
         }
     }
 }

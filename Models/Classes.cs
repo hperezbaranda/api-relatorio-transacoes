@@ -31,9 +31,9 @@ namespace api_relatorio_transacoes.Models
         [BsonElement("StatusInfo")]
         public string StatusInfo { get; set; }
         [BsonElement("CreatedAt")]
-        public string CreatedAt { get; set; }
+        public BsonDateTime CreatedAt { get; set; }
         [BsonElement("AcquirerAuthorizationDateTime")]
-        public string AcquirerAuthorizationDateTime { get; set; }
+        public BsonDateTime AcquirerAuthorizationDateTime { get; set; }
         
 
 

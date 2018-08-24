@@ -48,41 +48,19 @@ namespace api_relatorio_transacoes.Models
                         break;
                 }
             }
-            System.Console.WriteLine(filter);
+
             var coll = db.GetCollection<T>("transacoes");
             return coll.Find(filter).ToList();
         }
 
-        public  List<T> ObterItems<T>()
+        public  List<T> GetByData<T>(string data1,string data2)
         {   
             var builder = Builders<T>.Filter;
-            var filter = builder.Eq("CardBrandName", "Maestro") & builder.Eq("AmountInCent",3000);
-            
+            var filter = "{ CreatedAt: { $gte: ISODate('"+data1+"'),$lt: ISODate('"+data2+"')} }";
             var coll = db.GetCollection<T>("transacoes");
-            
-            // var cursor = coll.Find(filter).ToList();
-            return coll.Find(filter).ToList();
-            // return trans.Where(t=>t.TransactionId == id).Select(t=>t).FirstOrDefault();
-            // List<Transacao> t = new List<Transacao>();
-            // foreach (var document in cursor)
-            // {
-            //     // System.Console.Write(document.ToJson());
-            //     t.Add(document);   
-            // }
-            
-            // foreach (var item in t)
-            // {
-            //     System.Console.Write(item);
-            // }
-
-
-            // // //System.Console.Write(t);
-            // return t;
-
-            // return db.GetCollection<Transacao>("transacoes")
-            //     .Find(filter).ToList();
-            
+            return coll.Find(filter).ToList();            
         }
+
         public List<T> ObterItem<T>(string brand)
         {   
             // System.Console.WriteLine(brand);

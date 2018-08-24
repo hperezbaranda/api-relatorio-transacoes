@@ -32,7 +32,7 @@ namespace api_relatorio_transacoes.Controllers
             trans = _contexto.ObterItem<Transacao>(brandname);
             // return "value: "+id;
         
-            if (trans != null)
+            if (trans.Count > 0)
                 return new JsonResult(trans);
             else
                 return NotFound();
@@ -41,11 +41,16 @@ namespace api_relatorio_transacoes.Controllers
         //GET api/trans/cnpj/13123213,666666
         //GET api/trans/cnpj/13123213
         [HttpGet("cnpj/{ids}")]
-        public ActionResult<string> GetCNPJ(string ids){
-            
+        public ActionResult<Transacao> GetCNPJ(string ids){
+            // DateTime date1 = new DateTime(1996, 6, 3, 22, 15, 0);
+            // DateTime date2 = new DateTime(1996, 12, 6, 13, 2, 0);
+            // TimeSpan diff = new TimeSpan((24*30), 30, 0);
+            // var d = date2.Subtract(diff);
+            // return new ObjectResult(d);
             List<Transacao> trans = null;
             trans = _contexto.GetByType<Transacao>(SearchType.cnpj, ids);
-            if (trans != null)
+            Console.WriteLine(trans);
+            if (trans.Count > 0)
                 return new JsonResult(trans);
             else
                 return NotFound();
@@ -54,11 +59,11 @@ namespace api_relatorio_transacoes.Controllers
         //GET api/trans/brandname/name1,name2
         //GET api/trans/brandname/name1
         [HttpGet("brandname/{names}")]
-        public ActionResult<string> GetBrandName(string names){
+        public ActionResult<Transacao> GetBrandName(string names){
             
             List<Transacao> trans = null;
             trans = _contexto.GetByType<Transacao>(SearchType.brandname, names);
-            if (trans != null)
+            if (trans.Count > 0)
                 return new JsonResult(trans);
             else
                 return NotFound();
@@ -67,11 +72,30 @@ namespace api_relatorio_transacoes.Controllers
         //GET api/trans/adquirente/name1,name2
         //GET api/trans/adquirente/name1
         [HttpGet("acquirer/{names}")]
-        public ActionResult<string> GetAcquirer(string names){
+        public ActionResult<Transacao> GetAcquirer(string names){
             
             List<Transacao> trans = null;
             trans = _contexto.GetByType<Transacao>(SearchType.acquirer, names);
-            if (trans != null)
+            if (trans.Count > 0)
+                return new JsonResult(trans);
+            else
+                return NotFound();
+        }
+
+        //GET api/trans/data/date
+        //GET api/trans/data/date1,date2
+        [HttpGet("data/{pdata}")]
+        public ActionResult<Transacao> GetData(string pdata){
+            List<Transacao> trans = new List<Transacao>();
+           
+            foreach (var item in pdata.Split(","))
+            {
+                var data1 = pdata.Split(",")[0];
+                var data2 = new DateTime(Int32.Parse(item.Split("-")[0]),Int32.Parse(item.Split("-")[1]),Int32.Parse(item.Split("-")[2])+1)
+                        .ToString("yyyy'-'MM'-'dd");
+                trans =trans.Concat(_contexto.GetByData<Transacao>(data1,data2)).ToList();               
+            }
+            if (trans.Count > 0)
                 return new JsonResult(trans);
             else
                 return NotFound();
