@@ -7,8 +7,9 @@ using api_relatorio_transacoes.Models;
 using MongoDB.Bson;
 
 namespace api_relatorio_transacoes.Controllers
-{
-    [Route("api/data")]
+{ 
+    
+    [Route("api/trans/")]
     [ApiController]
     public class ValuesController : ControllerBase
     {
@@ -19,19 +20,11 @@ namespace api_relatorio_transacoes.Controllers
             _contexto = context;
         }
 
-       
-        // GET api/data/5
-        [HttpGet("{a}")]
-        public ActionResult<string> Get(int a)
-        {
-            return "value > "+a;
-        }
-
-        // GET api/data/?id=5,time=6
+        // GET api/trans/?id=5,cnpj=6
         [HttpGet]
         public ActionResult<Transacao> GetTransacao(int id=-1,long cnpj=-1,int checkout=-1
                 , string cardnum="" ,int amount=-1, int inst=-1, string acqname="",
-                string paymethod="", string brandname="", string status="", string statusinf ="",
+                string paymethod="", string brandname="Visa", string status="", string statusinf ="",
                  DateTime crated=new DateTime(),DateTime adquire = new DateTime() )
         {
             // System.Console.WriteLine(test.Split(",")[0]);
@@ -45,42 +38,45 @@ namespace api_relatorio_transacoes.Controllers
                 return NotFound();
         }
 
-        
-    }
-
-
-
-    [Route("api/otro")]
-    
-    public class MioController : ControllerBase
-    {
-         private DBContext _contexto;
-
-        public MioController(DBContext context)
-        {
-            _contexto = context;
-        }
-
-        // GET api/otro
-        [HttpGet]
-        public ActionResult<Transacao> GetAll()
-        {
+        //GET api/trans/cnpj/13123213,666666
+        //GET api/trans/cnpj/13123213
+        [HttpGet("cnpj/{ids}")]
+        public ActionResult<string> GetCNPJ(string ids){
+            
             List<Transacao> trans = null;
-            trans = _contexto.ObterItems<Transacao>();
+            trans = _contexto.GetByType<Transacao>(SearchType.cnpj, ids);
             if (trans != null)
                 return new JsonResult(trans);
             else
                 return NotFound();
-            // return new  JsonResult(_contexto.ObterItems<Transacao>());
         }
 
-
-        // Get api/otro/3
-        [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
-        {
-            return  "value2: "+id ;
+        //GET api/trans/brandname/name1,name2
+        //GET api/trans/brandname/name1
+        [HttpGet("brandname/{names}")]
+        public ActionResult<string> GetBrandName(string names){
+            
+            List<Transacao> trans = null;
+            trans = _contexto.GetByType<Transacao>(SearchType.brandname, names);
+            if (trans != null)
+                return new JsonResult(trans);
+            else
+                return NotFound();
         }
-        
+
+        //GET api/trans/adquirente/name1,name2
+        //GET api/trans/adquirente/name1
+        [HttpGet("acquirer/{names}")]
+        public ActionResult<string> GetAcquirer(string names){
+            
+            List<Transacao> trans = null;
+            trans = _contexto.GetByType<Transacao>(SearchType.acquirer, names);
+            if (trans != null)
+                return new JsonResult(trans);
+            else
+                return NotFound();
+        }
+
     }
+
 }

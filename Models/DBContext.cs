@@ -7,6 +7,8 @@ using MongoDB.Bson;
 
 namespace api_relatorio_transacoes.Models
 {
+    public enum SearchType { cnpj, brandname, acquirer }
+
     public class DBContext
     {
         private IConfiguration _configuration;
@@ -23,12 +25,40 @@ namespace api_relatorio_transacoes.Models
             db= client.GetDatabase("stone");
         }
 
-        public  List<Transacao> ObterItems<Transacao>()
+        public List<T> GetByType<T>(SearchType type,string elements){
+
+            var lstelement = elements.Split(",");
+            var telemnt= "";
+            var filter = "";
+            foreach (var ielement in lstelement)
+            {
+                switch (type)
+                {
+                    case SearchType.cnpj:
+                        telemnt+=""+ielement+",";
+                        filter = "{MerchantCnpj:{$in:["+telemnt+"]},}";
+                        break;
+                    case SearchType.brandname:
+                        telemnt+="'"+ielement+"',";
+                        filter = "{CardBrandName:{$in:["+telemnt+"]},}";
+                        break;
+                    case SearchType.acquirer:
+                        telemnt+="'"+ielement+"',";
+                        filter = "{AcquirerName:{$in:["+telemnt+"]},}";
+                        break;
+                }
+            }
+            System.Console.WriteLine(filter);
+            var coll = db.GetCollection<T>("transacoes");
+            return coll.Find(filter).ToList();
+        }
+
+        public  List<T> ObterItems<T>()
         {   
-            var builder = Builders<Transacao>.Filter;
+            var builder = Builders<T>.Filter;
             var filter = builder.Eq("CardBrandName", "Maestro") & builder.Eq("AmountInCent",3000);
             
-            var coll = db.GetCollection<Transacao>("transacoes");
+            var coll = db.GetCollection<T>("transacoes");
             
             // var cursor = coll.Find(filter).ToList();
             return coll.Find(filter).ToList();
@@ -53,11 +83,12 @@ namespace api_relatorio_transacoes.Models
             //     .Find(filter).ToList();
             
         }
-        public List<Transacao> ObterItem<Transacao>(string brand)
+        public List<T> ObterItem<T>(string brand)
         {   
             // System.Console.WriteLine(brand);
             // var filter1 ="";
             var lstbrand = brand.Split(",");
+            // System.Console.WriteLine(brand);
             var brands= "";
             
             foreach (var ibrand in lstbrand)
@@ -73,7 +104,7 @@ namespace api_relatorio_transacoes.Models
             // var filter = "{CardBrandName:{$in:['Maestro','Visa']}}";
             // var filter = "{CardBrandName:{$in:['Maestro','Visa',]}}";
 
-            var coll = db.GetCollection<Transacao>("transacoes");
+            var coll = db.GetCollection<T>("transacoes");
 
             // System.Console.WriteLine(filter1);
 
