@@ -64,7 +64,7 @@ namespace api_relatorio_transacoes.Models
             {
                 brands+="'"+ibrand+"',";
             }
-            var filter1 = "{CardBrandName:{$in:["+brands+"]}}";
+            var filter1 = "{CardBrandName:{$in:["+brands+"]},}";
             
             // var builder = Builders<Transacao>.Filter;
             // var filter = builder.Eq("CardBrandName", "Maestro") & builder.Eq("CardBrandName", "Visa");
