@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using MongoDB.Bson;
-
+using System.Threading.Tasks;
 namespace api_relatorio_transacoes.Models
 {
     public enum SearchType { cnpj, brandname, acquirer }
@@ -36,57 +36,40 @@ namespace api_relatorio_transacoes.Models
                 {
                     case SearchType.cnpj:
                         telemnt+=""+ielement+",";
-                        filter = "{MerchantCnpj:{$in:["+telemnt+"]},}";
+                        filter = "{MerchantCnpj:{$in:["+telemnt+"]}}";
                         break;
                     case SearchType.brandname:
                         telemnt+="'"+ielement+"',";
-                        filter = "{CardBrandName:{$in:["+telemnt+"]},}";
+                        filter = "{CardBrandName:{$in:["+telemnt+"]}}";
                         break;
                     case SearchType.acquirer:
                         telemnt+="'"+ielement+"',";
-                        filter = "{AcquirerName:{$in:["+telemnt+"]},}";
+                        filter = "{AcquirerName:{$in:["+telemnt+"]}}";
                         break;
                 }
             }
-
             var coll = db.GetCollection<T>("transacoes");
             return coll.Find(filter).ToList();
         }
 
         public  List<T> GetByData<T>(string data1,string data2)
         {   
+
             var builder = Builders<T>.Filter;
             var filter = "{ CreatedAt: { $gte: ISODate('"+data1+"'),$lt: ISODate('"+data2+"')} }";
+            // System.Console.WriteLine(filter);
             var coll = db.GetCollection<T>("transacoes");
             return coll.Find(filter).ToList();            
         }
 
-        public List<T> ObterItem<T>(string brand)
+        public List<T> GetItem<T>(string filter)
         {   
-            // System.Console.WriteLine(brand);
-            // var filter1 ="";
-            var lstbrand = brand.Split(",");
-            // System.Console.WriteLine(brand);
-            var brands= "";
             
-            foreach (var ibrand in lstbrand)
-            {
-                brands+="'"+ibrand+"',";
-            }
-            var filter1 = "{CardBrandName:{$in:["+brands+"]},}";
-            
-            // var builder = Builders<Transacao>.Filter;
-            // var filter = builder.Eq("CardBrandName", "Maestro") & builder.Eq("CardBrandName", "Visa");
-            // var filter = builder.In("CardBrandName", "Visa");
-            // var filter = "{CardBrandName:'Maestro',AmountInCent:3000}";
-            // var filter = "{CardBrandName:{$in:['Maestro','Visa']}}";
-            // var filter = "{CardBrandName:{$in:['Maestro','Visa',]}}";
-
             var coll = db.GetCollection<T>("transacoes");
 
-            // System.Console.WriteLine(filter1);
-
-            return coll.Find(filter1).ToList();
+            System.Console.WriteLine(filter);
+            
+            return coll.Find(filter).ToList();
         }
     }
 }

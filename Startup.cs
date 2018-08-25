@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO.Compression;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using api_relatorio_transacoes.Models;
 using Microsoft.AspNetCore.ResponseCompression;
-using System.IO.Compression;
+
 
 
 namespace api_relatorio_transacoes
@@ -30,13 +31,19 @@ namespace api_relatorio_transacoes
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<DBContext>();
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.Configure<GzipCompressionProviderOptions>(
                 options => options.Level = CompressionLevel.Optimal);
             services.AddResponseCompression(options =>
             {
                 options.Providers.Add<GzipCompressionProvider>();
             } );
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1).AddJsonOptions(opcoes =>
+            {
+                opcoes.SerializerSettings.NullValueHandling =
+                    Newtonsoft.Json.NullValueHandling.Ignore;
+            });
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

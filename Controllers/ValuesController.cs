@@ -20,40 +20,101 @@ namespace api_relatorio_transacoes.Controllers
             _contexto = context;
         }
 
-        // GET api/trans/?id=5,cnpj=6
+        // GET api/trans/?checkout=5,cnpj=6 ...
         [HttpGet]
-        public ActionResult<Transacao> GetTransacao(int id=-1,long cnpj=-1,int checkout=-1
-                , string cardnum="" ,int amount=-1, int inst=-1, string acqname="",
-                string paymethod="", string brandname="Visa", string status="", string statusinf ="",
-                 DateTime crated=new DateTime(),DateTime adquire = new DateTime() )
+        public ActionResult<Transacao> GetTransacao(string cnpj="",string amount="", string acqname="",
+                 string brandname="", string status="", string data="", int days=0 )
         {
-            // System.Console.WriteLine(test.Split(",")[0]);
-            List<Transacao> trans = null;
-            trans = _contexto.ObterItem<Transacao>(brandname);
+            // Console.WriteLine(cnpj);
+            string filter = "{";
+            if(cnpj != ""){
+                var lstelement = cnpj.Split(",");
+                var telemnt= "";
+                var tfilter ="";
+                foreach (var ielement in lstelement){
+                    telemnt+=""+ielement+",";
+                    tfilter = "MerchantCnpj:{$in:["+telemnt+"]},";
+                }
+                filter +=tfilter;
+            }
+            if(amount !=""){
+                var lstelement = amount.Split(",");
+                var telemnt= "";
+                var tfilter ="";
+                foreach (var ielement in lstelement){
+                    telemnt+=""+ielement+",";
+                    tfilter = "AmountInCent:{$in:["+telemnt+"]},";
+                }
+                filter +=tfilter;
+            }
+            if(acqname !=""){
+                var lstelement = acqname.Split(",");
+                var telemnt= "";
+                var tfilter ="";
+                foreach (var ielement in lstelement){
+                    telemnt+=""+ielement+",";
+                    tfilter = "AcquirerName:{$in:["+telemnt+"]},";
+                }
+                filter +=tfilter;
+            }
+            if(brandname !=""){
+                var lstelement = brandname.Split(",");
+                var telemnt= "";
+                var tfilter ="";
+                foreach (var ielement in lstelement){
+                    telemnt+=""+ielement+",";
+                    tfilter = "CardBrandName:{$in:["+telemnt+"]},";
+                }
+                filter +=tfilter;
+            }
+            if(status !=""){
+                var lstelement = status.Split(",");
+                var telemnt= "";
+                var tfilter ="";
+                foreach (var ielement in lstelement){
+                    telemnt+=""+ielement+",";
+                    tfilter = "Status:{$in:["+telemnt+"]},";
+                }
+                filter +=tfilter;
+            }
+            if(data !=""){
+                // { CreatedAt: { $gte: ISODate('"+data1+"'),$lt: ISODate('"+data2+"')} }
+                // Console.WriteLine(data);
+                var data2 = new DateTime(Int32.Parse(data.Split("-")[0]),Int32.Parse(data.Split("-")[1])
+                            ,Int32.Parse(data.Split("-")[2])+1).ToString("yyyy'-'MM'-'dd");;
+                filter +=" CreatedAt: { $gte: ISODate('"+data+"'),$lt: ISODate('"+data2+"')} ";
+            }else if(days != 0 ){
+                TimeSpan diff = new TimeSpan((24*days), 00, 0);
+           
+                var datanow = DateTime.Now.AddDays(1);
+                string data1 = datanow.Subtract(diff).ToString("yyyy'-'MM'-'dd");
+                filter +=" CreatedAt: { $gte: ISODate('"+data1+"'),$lt: ISODate('"+datanow.ToString("yyyy'-'MM'-'dd")+"')} ";
+            }
+
+            
+            
+            filter +="}";
+            List<Transacao> trans = new List<Transacao>();
+            trans = _contexto.GetItem<Transacao>(filter);
             // return "value: "+id;
         
             if (trans.Count > 0)
                 return Ok(new{results=trans});
             else
-                return NotFound();
+                return NotFound("Nenhum resultado para essa Busca");
         }
 
         //GET api/trans/cnpj/13123213,666666
         //GET api/trans/cnpj/13123213
         [HttpGet("cnpj/{ids}")]
         public ActionResult<Transacao> GetCNPJ(string ids){
-            // DateTime date1 = new DateTime(1996, 6, 3, 22, 15, 0);
-            // DateTime date2 = new DateTime(1996, 12, 6, 13, 2, 0);
-            // TimeSpan diff = new TimeSpan((24*30), 30, 0);
-            // var d = date2.Subtract(diff);
-            // return new ObjectResult(d);
-            List<Transacao> trans = null;
+            List<Transacao> trans = new List<Transacao>();
             trans = _contexto.GetByType<Transacao>(SearchType.cnpj, ids);
-            Console.WriteLine(trans);
+            
             if (trans.Count > 0)
                 return Ok(new{results=trans});
             else
-                return NotFound();
+                return NotFound("Nenhum resultado para essa Busca");
         }
 
         //GET api/trans/brandname/name1,name2
@@ -61,12 +122,12 @@ namespace api_relatorio_transacoes.Controllers
         [HttpGet("brandname/{names}")]
         public ActionResult<Transacao> GetBrandName(string names){
             
-            List<Transacao> trans = null;
+            List<Transacao> trans = new List<Transacao>();
             trans = _contexto.GetByType<Transacao>(SearchType.brandname, names);
             if (trans.Count > 0)
                 return Ok(new{results=trans});
             else
-                return NotFound();
+                return NotFound("Nenhum resultado para essa Busca");
         }
 
         //GET api/trans/adquirente/name1,name2
@@ -74,12 +135,12 @@ namespace api_relatorio_transacoes.Controllers
         [HttpGet("acquirer/{names}")]
         public ActionResult<Transacao> GetAcquirer(string names){
             
-            List<Transacao> trans = null;
+            List<Transacao> trans = new List<Transacao>();
             trans = _contexto.GetByType<Transacao>(SearchType.acquirer, names);
             if (trans.Count > 0)
                 return Ok(new{results=trans});
             else
-                return NotFound();
+                return NotFound("Nenhum resultado para essa Busca");
         }
 
         //GET api/trans/data/2018-05-56
@@ -87,7 +148,7 @@ namespace api_relatorio_transacoes.Controllers
         [HttpGet("data/{pdata}")]
         public ActionResult<Transacao> GetData(string pdata){
             List<Transacao> trans = new List<Transacao>();
-           
+            
             foreach (var item in pdata.Split(","))
             {
                 var data1 = pdata.Split(",")[0];
@@ -98,7 +159,23 @@ namespace api_relatorio_transacoes.Controllers
             if (trans.Count > 0)
                 return Ok(new{results=trans});
             else
-                return NotFound();
+                return NotFound("Nenhum resultado para essa Busca");
+        }
+
+        //GET api/trans/last/3
+        [HttpGet("last/{days}")]
+        public ActionResult<Transacao> GetLastDay(int days){
+            List<Transacao> trans = new List<Transacao>();
+            TimeSpan diff = new TimeSpan((24*days), 00, 0);
+           
+            var datanow = DateTime.Now.AddDays(1);
+            string data = datanow.Subtract(diff).ToString("yyyy'-'MM'-'dd");
+            trans =_contexto.GetByData<Transacao>(data,datanow.ToString("yyyy'-'MM'-'dd"));               
+
+            if (trans.Count > 0)
+                return Ok(new{results=trans});
+            else
+                return NotFound("Nenhum resultado para essa Busca");
         }
 
     }
