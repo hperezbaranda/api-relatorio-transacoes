@@ -33,7 +33,7 @@ namespace api_relatorio_transacoes.Controllers
             // return "value: "+id;
         
             if (trans.Count > 0)
-                return new JsonResult(trans);
+                return Ok(new{results=trans});
             else
                 return NotFound();
         }
@@ -51,7 +51,7 @@ namespace api_relatorio_transacoes.Controllers
             trans = _contexto.GetByType<Transacao>(SearchType.cnpj, ids);
             Console.WriteLine(trans);
             if (trans.Count > 0)
-                return new JsonResult(trans);
+                return Ok(new{results=trans});
             else
                 return NotFound();
         }
@@ -64,7 +64,7 @@ namespace api_relatorio_transacoes.Controllers
             List<Transacao> trans = null;
             trans = _contexto.GetByType<Transacao>(SearchType.brandname, names);
             if (trans.Count > 0)
-                return new JsonResult(trans);
+                return Ok(new{results=trans});
             else
                 return NotFound();
         }
@@ -77,13 +77,13 @@ namespace api_relatorio_transacoes.Controllers
             List<Transacao> trans = null;
             trans = _contexto.GetByType<Transacao>(SearchType.acquirer, names);
             if (trans.Count > 0)
-                return new JsonResult(trans);
+                return Ok(new{results=trans});
             else
                 return NotFound();
         }
 
-        //GET api/trans/data/date
-        //GET api/trans/data/date1,date2
+        //GET api/trans/data/2018-05-56
+        //GET api/trans/data/2018-12-30,2089-02-29
         [HttpGet("data/{pdata}")]
         public ActionResult<Transacao> GetData(string pdata){
             List<Transacao> trans = new List<Transacao>();
@@ -96,7 +96,7 @@ namespace api_relatorio_transacoes.Controllers
                 trans =trans.Concat(_contexto.GetByData<Transacao>(data1,data2)).ToList();               
             }
             if (trans.Count > 0)
-                return new JsonResult(trans);
+                return Ok(new{results=trans});
             else
                 return NotFound();
         }
