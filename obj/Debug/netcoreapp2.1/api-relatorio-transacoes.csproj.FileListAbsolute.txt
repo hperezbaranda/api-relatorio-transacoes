@@ -1,0 +1,14 @@
+/home/hector/api-relatorio-transacoes/bin/Debug/netcoreapp2.1/api-relatorio-transacoes.deps.json
+/home/hector/api-relatorio-transacoes/bin/Debug/netcoreapp2.1/api-relatorio-transacoes.runtimeconfig.json
+/home/hector/api-relatorio-transacoes/bin/Debug/netcoreapp2.1/api-relatorio-transacoes.runtimeconfig.dev.json
+/home/hector/api-relatorio-transacoes/bin/Debug/netcoreapp2.1/api-relatorio-transacoes.dll
+/home/hector/api-relatorio-transacoes/bin/Debug/netcoreapp2.1/api-relatorio-transacoes.pdb
+/home/hector/api-relatorio-transacoes/obj/Debug/netcoreapp2.1/api-relatorio-transacoes.csprojAssemblyReference.cache
+/home/hector/api-relatorio-transacoes/obj/Debug/netcoreapp2.1/api-relatorio-transacoes.csproj.CoreCompileInputs.cache
+/home/hector/api-relatorio-transacoes/obj/Debug/netcoreapp2.1/api-relatorio-transacoes.RazorAssemblyInfo.cache
+/home/hector/api-relatorio-transacoes/obj/Debug/netcoreapp2.1/api-relatorio-transacoes.RazorAssemblyInfo.cs
+/home/hector/api-relatorio-transacoes/obj/Debug/netcoreapp2.1/api-relatorio-transacoes.AssemblyInfoInputs.cache
+/home/hector/api-relatorio-transacoes/obj/Debug/netcoreapp2.1/api-relatorio-transacoes.AssemblyInfo.cs
+/home/hector/api-relatorio-transacoes/obj/Debug/netcoreapp2.1/api-relatorio-transacoes.RazorTargetAssemblyInfo.cache
+/home/hector/api-relatorio-transacoes/obj/Debug/netcoreapp2.1/api-relatorio-transacoes.dll
+/home/hector/api-relatorio-transacoes/obj/Debug/netcoreapp2.1/api-relatorio-transacoes.pdb
