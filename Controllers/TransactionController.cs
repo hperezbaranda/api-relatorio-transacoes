@@ -11,11 +11,11 @@ namespace api_relatorio_transacoes.Controllers
     
     [Route("api/trans/")]
     [ApiController]
-    public class ValuesController : ControllerBase
+    public class TransactionController : ControllerBase
     {
         private DBContext _contexto;
 
-        public ValuesController(DBContext context)
+        public TransactionController(DBContext context)
         {
             _contexto = context;
         }
