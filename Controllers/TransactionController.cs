@@ -22,7 +22,7 @@ namespace api_relatorio_transacoes.Controllers
 
         // GET api/trans/?checkout=5,cnpj=6 ...
         [HttpGet]
-        public ActionResult GetTransacao(string cnpj="",string amount="", string acqname="",
+        public ActionResult GetTransaction(string cnpj="",string amount="", string acqname="",
                  string brandname="", string status="", string data="", int days=0 )
         {
             // Console.WriteLine(cnpj);
