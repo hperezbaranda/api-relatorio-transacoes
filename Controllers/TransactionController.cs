@@ -22,7 +22,7 @@ namespace api_relatorio_transacoes.Controllers
 
         // GET api/trans/?checkout=5,cnpj=6 ...
         [HttpGet]
-        public ActionResult<Transacao> GetTransacao(string cnpj="",string amount="", string acqname="",
+        public ActionResult GetTransacao(string cnpj="",string amount="", string acqname="",
                  string brandname="", string status="", string data="", int days=0 )
         {
             // Console.WriteLine(cnpj);
@@ -107,7 +107,7 @@ namespace api_relatorio_transacoes.Controllers
         //GET api/trans/cnpj/13123213,666666
         //GET api/trans/cnpj/13123213
         [HttpGet("cnpj/{ids}")]
-        public ActionResult<Transacao> GetCNPJ(string ids){
+        public ActionResult GetCNPJ(string ids){
             List<Transacao> trans = new List<Transacao>();
             trans = _contexto.GetByType<Transacao>(SearchType.cnpj, ids);
             
@@ -120,7 +120,7 @@ namespace api_relatorio_transacoes.Controllers
         //GET api/trans/brandname/name1,name2
         //GET api/trans/brandname/name1
         [HttpGet("brandname/{names}")]
-        public ActionResult<Transacao> GetBrandName(string names){
+        public ActionResult GetBrandName(string names){
             
             List<Transacao> trans = new List<Transacao>();
             trans = _contexto.GetByType<Transacao>(SearchType.brandname, names);
@@ -133,7 +133,7 @@ namespace api_relatorio_transacoes.Controllers
         //GET api/trans/adquirente/name1,name2
         //GET api/trans/adquirente/name1
         [HttpGet("acquirer/{names}")]
-        public ActionResult<Transacao> GetAcquirer(string names){
+        public ActionResult GetAcquirer(string names){
             
             List<Transacao> trans = new List<Transacao>();
             trans = _contexto.GetByType<Transacao>(SearchType.acquirer, names);
@@ -146,7 +146,7 @@ namespace api_relatorio_transacoes.Controllers
         //GET api/trans/data/2018-05-56
         //GET api/trans/data/2018-12-30,2089-02-29
         [HttpGet("data/{pdata}")]
-        public ActionResult<Transacao> GetData(string pdata){
+        public ActionResult GetData(string pdata){
             List<Transacao> trans = new List<Transacao>();
             
             foreach (var item in pdata.Split(","))
@@ -164,7 +164,7 @@ namespace api_relatorio_transacoes.Controllers
 
         //GET api/trans/last/3
         [HttpGet("last/{days}")]
-        public ActionResult<Transacao> GetLastDay(int days){
+        public ActionResult GetLastDay(int days){
             List<Transacao> trans = new List<Transacao>();
             TimeSpan diff = new TimeSpan((24*days), 00, 0);
            
