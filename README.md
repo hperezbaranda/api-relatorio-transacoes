@@ -19,4 +19,5 @@ O API faz o relatorio das transações filtrando por cnpj do lojista, data, band
 
 Mas as filtragem também podem ser composto por parametros de tipos diferentes, para isso a API precisará que os parametros sejam pasado por declaração de variaveis:
 - Pocurando as transações que foram feitas usando um cartão de bandeira Visa nos últimos 5 dias: ***http://dir:port/api/trans/?brandname="Visa"&days=5***.
+
 *IMPORTANTE!* A requisição para uma data especifica e para x días são filtros excluyentes, portanto sempre vai se procurar a variavel *data* se não existir então vai se validar a variavel *day*.
