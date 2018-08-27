@@ -4,6 +4,8 @@ using api_relatorio_transacoes.Controllers;
 using api_relatorio_transacoes.Models;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Linq;
 
 namespace api_relatorio_transacoes_test
 {
@@ -16,9 +18,10 @@ namespace api_relatorio_transacoes_test
             var mock = new Mock<DBContext>();
             mock.Setup(d => d.GetItem<Transacao>(It.IsAny<string>())).Returns(new List<Transacao>());
             var control = new TransactionController(mock.Object);
-            string cnpj = "123456789";
+            string cnpj = "cnpj=123456789";
+
             Assert.IsNotNull(control.GetTransaction(cnpj));
-            // Assert.AreEqual(control.GetTransaction(cnpj), new List<Transacao>());
+            // Assert.AreEqual(control.GetTransaction(cnpj), new OkObjectResult(new List<Transacao>()));
         }
 
         [TestMethod]
@@ -29,8 +32,9 @@ namespace api_relatorio_transacoes_test
             mock.Setup(d =>d.GetByType<Transacao>(SearchType.cnpj,It.IsAny<string>())).Returns(new List<Transacao>());
             var control = new TransactionController(mock.Object);
 
+            
             Assert.IsNotNull(control.GetCNPJ("123456789"));
-            // Assert.AreEqual(control.GetCNPJ("123456789"), new List<Transacao>());
+            // Assert.AreEqual(control.GetCNPJ("123456789"), new OkObjectResult(new List<Transacao>()));
         }
     }
 }
