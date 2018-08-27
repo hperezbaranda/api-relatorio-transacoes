@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/api-relatorio-transacoes/api-relatorio-transacoes.csproj"
+                "${workspaceFolder}/api-relatorio-transacoes.csproj"
             ],
             "problemMatcher": "$msCompile"
         }

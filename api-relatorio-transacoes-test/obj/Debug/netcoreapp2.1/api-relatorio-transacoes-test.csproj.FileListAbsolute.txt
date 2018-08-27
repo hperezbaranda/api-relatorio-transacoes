@@ -1,0 +1,17 @@
+/home/hector/solucao_web_api/api-relatorio-transacoes-test/obj/Debug/netcoreapp2.1/api-relatorio-transacoes-test.csprojAssemblyReference.cache
+/home/hector/solucao_web_api/api-relatorio-transacoes-test/obj/Debug/netcoreapp2.1/api-relatorio-transacoes-test.csproj.CoreCompileInputs.cache
+/home/hector/solucao_web_api/api-relatorio-transacoes-test/obj/Debug/netcoreapp2.1/api-relatorio-transacoes-test.AssemblyInfoInputs.cache
+/home/hector/solucao_web_api/api-relatorio-transacoes-test/obj/Debug/netcoreapp2.1/api-relatorio-transacoes-test.AssemblyInfo.cs
+/home/hector/solucao_web_api/api-relatorio-transacoes-test/bin/Debug/netcoreapp2.1/Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+/home/hector/solucao_web_api/api-relatorio-transacoes-test/bin/Debug/netcoreapp2.1/Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+/home/hector/solucao_web_api/api-relatorio-transacoes-test/bin/Debug/netcoreapp2.1/Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+/home/hector/solucao_web_api/api-relatorio-transacoes-test/bin/Debug/netcoreapp2.1/api-relatorio-transacoes-test.deps.json
+/home/hector/solucao_web_api/api-relatorio-transacoes-test/bin/Debug/netcoreapp2.1/api-relatorio-transacoes-test.runtimeconfig.json
+/home/hector/solucao_web_api/api-relatorio-transacoes-test/bin/Debug/netcoreapp2.1/api-relatorio-transacoes-test.runtimeconfig.dev.json
+/home/hector/solucao_web_api/api-relatorio-transacoes-test/bin/Debug/netcoreapp2.1/api-relatorio-transacoes-test.dll
+/home/hector/solucao_web_api/api-relatorio-transacoes-test/bin/Debug/netcoreapp2.1/api-relatorio-transacoes-test.pdb
+/home/hector/solucao_web_api/api-relatorio-transacoes-test/bin/Debug/netcoreapp2.1/api-relatorio-transacoes.dll
+/home/hector/solucao_web_api/api-relatorio-transacoes-test/bin/Debug/netcoreapp2.1/api-relatorio-transacoes.pdb
+/home/hector/solucao_web_api/api-relatorio-transacoes-test/obj/Debug/netcoreapp2.1/api-relatorio-transacoes-test.csproj.CopyComplete
+/home/hector/solucao_web_api/api-relatorio-transacoes-test/obj/Debug/netcoreapp2.1/api-relatorio-transacoes-test.dll
+/home/hector/solucao_web_api/api-relatorio-transacoes-test/obj/Debug/netcoreapp2.1/api-relatorio-transacoes-test.pdb
