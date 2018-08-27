@@ -7,9 +7,9 @@ using MongoDB.Bson;
 using System.Threading.Tasks;
 namespace api_relatorio_transacoes.Models
 {
-    public enum SearchType { cnpj, brandname, acquirer }
+    //public enum SearchType { cnpj, brandname, acquirer }
 
-    public class DBContext
+    public class DBContext : IDBContext<Transacao>
     {
         private IConfiguration _configuration;
         private MongoClient client;
@@ -22,8 +22,12 @@ namespace api_relatorio_transacoes.Models
                 _configuration.GetSection("MongoConnection:ConnectionString").Value);
             db= client.GetDatabase("stone");
         }
+        public DBContext()
+        {
+            
+        }
 
-        public List<T> GetByType<T>(SearchType type,string elements){
+        public virtual List<T> GetByType<T>(SearchType type,string elements){
 
             var lstelement = elements.Split(",");
             var telemnt= "";
@@ -59,7 +63,7 @@ namespace api_relatorio_transacoes.Models
             return coll.Find(filter).ToList();            
         }
 
-        public List<T> GetItem<T>(string filter)
+        public virtual List<T> GetItem<T>(string filter)
         {   
             var coll = db.GetCollection<T>("transacoes");
             return coll.Find(filter).ToList();
