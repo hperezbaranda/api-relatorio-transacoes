@@ -9,7 +9,7 @@ namespace api_relatorio_transacoes.Models
 {
     //public enum SearchType { cnpj, brandname, acquirer }
 
-    public class DBContext : IDBContext<Transacao>
+    public class DBContext : IDBContext
     {
         private IConfiguration _configuration;
         private MongoClient client;
