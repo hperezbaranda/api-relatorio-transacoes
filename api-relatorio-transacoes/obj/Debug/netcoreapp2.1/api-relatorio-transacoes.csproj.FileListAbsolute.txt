@@ -26,3 +26,17 @@
 /home/hector/solucao_web_api/api-relatorio-transacoes/obj/Debug/netcoreapp2.1/api-relatorio-transacoes.RazorTargetAssemblyInfo.cache
 /home/hector/solucao_web_api/api-relatorio-transacoes/obj/Debug/netcoreapp2.1/api-relatorio-transacoes.dll
 /home/hector/solucao_web_api/api-relatorio-transacoes/obj/Debug/netcoreapp2.1/api-relatorio-transacoes.pdb
+c:\Users\hector.baranda\solucao_web_api\api-relatorio-transacoes\bin\Debug\netcoreapp2.1\api-relatorio-transacoes.deps.json
+c:\Users\hector.baranda\solucao_web_api\api-relatorio-transacoes\bin\Debug\netcoreapp2.1\api-relatorio-transacoes.runtimeconfig.json
+c:\Users\hector.baranda\solucao_web_api\api-relatorio-transacoes\bin\Debug\netcoreapp2.1\api-relatorio-transacoes.runtimeconfig.dev.json
+c:\Users\hector.baranda\solucao_web_api\api-relatorio-transacoes\bin\Debug\netcoreapp2.1\api-relatorio-transacoes.dll
+c:\Users\hector.baranda\solucao_web_api\api-relatorio-transacoes\bin\Debug\netcoreapp2.1\api-relatorio-transacoes.pdb
+c:\Users\hector.baranda\solucao_web_api\api-relatorio-transacoes\obj\Debug\netcoreapp2.1\api-relatorio-transacoes.csprojAssemblyReference.cache
+c:\Users\hector.baranda\solucao_web_api\api-relatorio-transacoes\obj\Debug\netcoreapp2.1\api-relatorio-transacoes.csproj.CoreCompileInputs.cache
+c:\Users\hector.baranda\solucao_web_api\api-relatorio-transacoes\obj\Debug\netcoreapp2.1\api-relatorio-transacoes.RazorAssemblyInfo.cache
+c:\Users\hector.baranda\solucao_web_api\api-relatorio-transacoes\obj\Debug\netcoreapp2.1\api-relatorio-transacoes.RazorAssemblyInfo.cs
+c:\Users\hector.baranda\solucao_web_api\api-relatorio-transacoes\obj\Debug\netcoreapp2.1\api-relatorio-transacoes.AssemblyInfoInputs.cache
+c:\Users\hector.baranda\solucao_web_api\api-relatorio-transacoes\obj\Debug\netcoreapp2.1\api-relatorio-transacoes.AssemblyInfo.cs
+c:\Users\hector.baranda\solucao_web_api\api-relatorio-transacoes\obj\Debug\netcoreapp2.1\api-relatorio-transacoes.RazorTargetAssemblyInfo.cache
+c:\Users\hector.baranda\solucao_web_api\api-relatorio-transacoes\obj\Debug\netcoreapp2.1\api-relatorio-transacoes.dll
+c:\Users\hector.baranda\solucao_web_api\api-relatorio-transacoes\obj\Debug\netcoreapp2.1\api-relatorio-transacoes.pdb
